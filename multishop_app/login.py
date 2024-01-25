@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response 
 from rest_framework.permissions import IsAuthenticated
 from .models import *
-from django.contrib.auth import login
+from django.contrib.auth import login as login_system
 from rest_framework import status
 from .serializer import *
 
@@ -12,7 +12,7 @@ class LoginView(APIView):
         
         if serializer.is_valid():
             user = serializer.validated_data['user']
-            login(request, user)
+            login_system(request, user)
             response_data = {
                 "message": "Login successfully",
                 "status": status.HTTP_200_OK
